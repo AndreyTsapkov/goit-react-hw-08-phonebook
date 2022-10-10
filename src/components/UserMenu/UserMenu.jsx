@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth';
+import authSelectors from 'redux/auth/authSelectors';
 import { logOut } from 'redux/auth/authOperations';
 import {
   UserMenuContainer,

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth';
+import authSelectors from 'redux/auth/authSelectors';
 import { NavBar, NavButton } from './Navigation.styled';
 
 export const Navigation = () => {

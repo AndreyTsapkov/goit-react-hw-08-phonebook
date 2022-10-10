@@ -1,11 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import {
-  getContact,
-  getFilterWord,
-  IsLoading,
-} from 'redux/contacts/contactsSelectors';
 import { RotatingLines } from 'react-loader-spinner';
 import { AppContainer, Loader } from './App.styled';
 import authSelectors from 'redux/auth/authSelectors';
