@@ -5,7 +5,7 @@ import {
   HomePageText,
 } from './HomePage.styled';
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <>
       <HomePageContainer>
@@ -21,3 +21,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;

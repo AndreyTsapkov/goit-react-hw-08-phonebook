@@ -11,7 +11,7 @@ import {
   LoginPageTitle,
 } from './LoginPage.styled';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -62,3 +62,5 @@ export const LoginPage = () => {
     </LoginPageContainer>
   );
 };
+
+export default LoginPage;

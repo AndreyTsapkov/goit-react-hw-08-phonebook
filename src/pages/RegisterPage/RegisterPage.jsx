@@ -11,7 +11,7 @@ import {
   RegisterPageTitle,
 } from './RegisterPage.styled';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -73,3 +73,5 @@ export const RegisterPage = () => {
     </RegisterPageContainer>
   );
 };
+
+export default RegisterPage;

@@ -1,91 +1,42 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import {
   getContact,
   getFilterWord,
   IsLoading,
 } from 'redux/contacts/contactsSelectors';
 import { RotatingLines } from 'react-loader-spinner';
-import { contactsOperations } from 'redux/contacts';
-import {
-  AppContainer,
-  AppTitle,
-  AppMainTitle,
-  AppSection,
-  DesignDiv,
-  Circle,
-  Loader,
-} from './App.styled';
-import { Contacts } from '../Contacts';
-import { ContactsForm } from '../ContactsForm';
-import { ContactsFilter } from '../ContactsFilter';
+import { AppContainer, Loader } from './App.styled';
+import authSelectors from 'redux/auth/authSelectors';
+import { fetchCurrentUser } from 'redux/auth/authOperations';
+import AppBar from 'components/AppBar';
+import PrivateRoute from 'components/Routes/PrivateRoute';
+import PublicRoute from 'components/Routes/PublicRoute';
+
+//
+const HomePage = lazy(() => import('pages/HomePage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const FirstPage = lazy(() => import('pages/FirstPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
 
 //
 
 export const App = () => {
   const dispatch = useDispatch();
-
-  const contacts = useSelector(getContact);
-  console.log(contacts);
-  const filterWord = useSelector(getFilterWord);
-  const loading = useSelector(IsLoading);
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   useEffect(() => {
-    dispatch(contactsOperations.fetchContacts());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
-
-  const getNormilizeContacts = () => {
-    if (filterWord) {
-      const normalizeFilter = filterWord.toLowerCase();
-
-      if (contacts.length !== 0) {
-        return contacts.filter(
-          contact =>
-            contact.name.toLowerCase().includes(normalizeFilter) ||
-            contact.phone.includes(filterWord)
-        );
-      }
-    }
-
-    return contacts;
-  };
 
   return (
     <AppContainer>
-      <AppSection>
-        <AppMainTitle>Phonebook</AppMainTitle>
-        <ContactsForm></ContactsForm>
-        <DesignDiv>
-          <Circle
-            color="#f943fd"
-            width="165px"
-            height="165px"
-            opacity="0.3"
-            marginTop="50px"
-            marginLeft="72px"
-          ></Circle>
-          <Circle
-            color="#96e6ff"
-            width="237px"
-            height="237px"
-            opacity="0.3"
-            marginTop="231px"
-            marginLeft="101px"
-          ></Circle>
-          <Circle
-            color="#f943fd"
-            width="205px"
-            height="205px"
-            opacity="0.2"
-            marginTop="187px"
-            marginLeft="390px"
-          ></Circle>
-        </DesignDiv>
-      </AppSection>
-
-      <AppSection>
-        <AppTitle>Contacts</AppTitle>
-        {loading && (
+      <AppBar />
+      <Suspense>
+        fallback=
+        {
           <Loader role="alert">
             <RotatingLines
               strokeColor="grey"
@@ -95,14 +46,44 @@ export const App = () => {
               visible={true}
             />
           </Loader>
+        }
+        {!isFetchingCurrentUser && (
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            <Route
+              path="/register"
+              exact
+              element={
+                <PublicRoute>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/login"
+              exact
+              element={
+                <PublicRoute>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
         )}
-        <ContactsFilter />
-        {contacts.length !== 0 ? (
-          <Contacts contacts={getNormilizeContacts()} />
-        ) : null}
-      </AppSection>
+      </Suspense>
     </AppContainer>
   );
 };
-
-// return Notify.warning(`${contactObj.name} is already in contacts.`);

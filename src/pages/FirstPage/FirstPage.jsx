@@ -5,7 +5,7 @@ import {
   FirstPageLogo,
 } from './FirstPage.styled';
 
-export const FirstPage = () => {
+const FirstPage = () => {
   return (
     <FirstPageContainer>
       <FirstPageLogo />
@@ -13,3 +13,5 @@ export const FirstPage = () => {
     </FirstPageContainer>
   );
 };
+
+export default FirstPage;
