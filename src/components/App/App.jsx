@@ -12,7 +12,7 @@ import PublicRoute from 'components/Routes/PublicRoute';
 //
 const HomePage = lazy(() => import('pages/HomePage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
-const FirstPage = lazy(() => import('pages/FirstPage'));
+// const FirstPage = lazy(() => import('pages/FirstPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 

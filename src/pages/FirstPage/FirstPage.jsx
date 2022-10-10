@@ -1,4 +1,4 @@
-import Logo from './Logo.png';
+// import Logo from './Logo.png';
 import {
   FirstPageContainer,
   FirstPageTitle,
