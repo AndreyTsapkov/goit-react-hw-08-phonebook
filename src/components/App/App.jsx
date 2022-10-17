@@ -10,11 +10,11 @@ import PrivateRoute from 'components/Routes/PrivateRoute';
 import PublicRoute from 'components/Routes/PublicRoute';
 
 //
-const HomePage = lazy(() => import('pages/HomePage'));
-const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 // const FirstPage = lazy(() => import('pages/FirstPage'));
-const RegisterPage = lazy(() => import('pages/RegisterPage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 
 //
 
@@ -29,9 +29,8 @@ export const App = () => {
   return (
     <AppContainer>
       <AppBar />
-      <Suspense>
-        fallback=
-        {
+      <Suspense
+        fallback={
           <Loader role="alert">
             <RotatingLines
               strokeColor="grey"
@@ -42,6 +41,7 @@ export const App = () => {
             />
           </Loader>
         }
+      >
         {!isFetchingCurrentUser && (
           <Routes>
             <Route path="/" element={<HomePage />} />
