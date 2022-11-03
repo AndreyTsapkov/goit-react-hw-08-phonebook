@@ -1,6 +1,11 @@
 import styled from '@emotion/styled';
 
-export const RegisterPageContainer = styled.div``;
+export const RegisterPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const RegisterPageTitle = styled.h2``;
 

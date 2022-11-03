@@ -1,6 +1,11 @@
 import styled from '@emotion/styled';
 
-export const LoginPageContainer = styled.div``;
+export const LoginPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const LoginPageTitle = styled.h2``;
 
